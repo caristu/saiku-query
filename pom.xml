@@ -4,11 +4,11 @@
 
 	<groupId>org.saiku</groupId>
 	<artifactId>saiku-query</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1-ob-1.4.600</version>
 	<packaging>jar</packaging>
 
 	<name>query</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/caristu/saiku-query</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,19 +60,35 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+					   <manifestEntries>
+					     <info>Saiku Query patched for Openbravo Analytics</info>
+					      <code>${project.url}</code>
+					   </manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
         <repository>
-            <id>pentaho-third-party</id>
-            <url>http://nexus.pentaho.org/content/repositories/proxied-3rd-party-releases/</url>
+          <id>pentaho.resolve.repo</id>
+          <name>Pentaho Omni</name>
+          <url>http://nexus.pentaho.org/content/groups/omni</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
         </repository>
-        <repository>
-            <id>pentaho-public-release</id>
-            <url>http://nexus.pentaho.org/content/repositories/pentaho-public-release-repos/</url>
-        </repository>
-	</repositories>
+    </repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.olap4j</groupId>
@@ -98,9 +114,14 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+            </dependency>
+		<dependency>
 			<groupId>pentaho</groupId>
 			<artifactId>mondrian</artifactId>
-			<version>3.9.0.2</version>
+			<version>3.14.0.4-66</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.servlet</groupId>
